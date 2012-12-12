@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit name="REEF-DERBY" transaction-type="RESOURCE_LOCAL">
+
+        <class>aims.app.reefmonitoring.ejb3.Keywords</class>
+        <class>aims.app.reefmonitoring.ejb3.TaxonEntity</class>
+
+        <class>aims.app.reefmonitoring.ejb3.AllSpecyEntity</class>
+
+        <class>PhylumEntity</class>
+        <class>ClazzEntity</class>
+        <class>OrdersEntity</class>
+        <class>FamilyEntity</class>
+        <class>GenusEntity</class>
+        <class>SpeciesEntity</class>
+
+        <class>ReefGeolocale</class>
+        <class>RmSectorEntity</class>
+
+        <properties>
+
+            <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:REEFMON.db"/>
+
+
+               </properties>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+    </persistence-unit>
+
+    <persistence-unit name="REEF-ORACLE" transaction-type="RESOURCE_LOCAL">
+        <class>aims.app.reefmonitoring.ejb3.Sample</class>
+        <class>aims.app.reefmonitoring.ejb3.SampleTypes</class>
+        <class>aims.app.reefmonitoring.ejb3.Waypoints</class>
+        <class>aims.app.reefmonitoring.ejb3.ReefGeolocale</class>
+        <class>aims.app.reefmonitoring.ejb3.AesAreasbleached</class>
+        <class>aims.app.reefmonitoring.ejb3.AesBenthicForm</class>
+        <class>aims.app.reefmonitoring.ejb3.AesFeatures</class>
+        <class>aims.app.reefmonitoring.ejb3.AesHcForm</class>
+        <class>aims.app.reefmonitoring.ejb3.AesSubstrate</class>
+        <class>aims.app.reefmonitoring.ejb3.AesTargetspec</class>
+        <class>aims.app.reefmonitoring.ejb3.Allspecies</class>
+        <class>aims.app.reefmonitoring.ejb3.Benthos</class>
+        <class>aims.app.reefmonitoring.ejb3.Demog</class>
+        <class>aims.app.reefmonitoring.ejb3.AimsDocuments</class>
+        <class>aims.app.reefmonitoring.ejb3.FishCodes</class>
+        <class>aims.app.reefmonitoring.ejb3.FishCounts</class>
+        <class>aims.app.reefmonitoring.ejb3.FishFeeding</class>
+        <class>aims.app.reefmonitoring.ejb3.Juvenilecoralsample1</class>
+        <class>aims.app.reefmonitoring.ejb3.Keywords</class>
+        <class>aims.app.reefmonitoring.ejb3.Photo</class>
+        <class>aims.app.reefmonitoring.ejb3.Photogroup</class>
+        <class>aims.app.reefmonitoring.ejb3.Photokeyword</class>
+        <class>aims.app.reefmonitoring.ejb3.Phototaxa</class>
+        <class>aims.app.reefmonitoring.ejb3.RmAesthetics</class>
+        <class>aims.app.reefmonitoring.ejb3.RmVpoint</class>
+        <class>aims.app.reefmonitoring.ejb3.ScubaSearch</class>
+        <class>aims.app.reefmonitoring.ejb3.VpointProj</class>
+        <class>aims.app.reefmonitoring.ejb3.RmSectorEntity</class>
+        <class>
+            aims.app.reefmonitoring.ejb3.Rmmanta
+        </class>
+        <class>
+            aims.app.reefmonitoring.ejb3.Tilesdeployments
+        </class>
+        <class>aims.app.reefmonitoring.ejb3.TileEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileGenuEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileMicroHabitatEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileRecruitEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileSurfaceEntity</class>
+
+        <class>
+            aims.app.phototransect.VAllVpointCodes
+        </class>
+        <class>
+            aims.app.reefmonitoring.ejb3.Vtaxatable
+        </class>
+        <class>aims.app.reefmonitoring.ejb3.ForamCountEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamFamilyEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamGenuEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamSampleEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamSpecyEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamSubOrderEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamTrophicEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.OliteUserCruisesEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.SedimentSampleEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.SedimentEntity</class>
+        <properties>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="false"/>
+            <property name="hibernate.use_sql_comments" value="false"/>
+            <property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
+            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@ora-reef:1521:REEF"/>
+            <property name="hibernate.connection.username" value="REEFMON"/>
+            <property name="hibernate.connection.password" value="XXXX"/>
+            <property name="org.hibernate.SQL.level" value="FINE"/>
+            <property name="org.hibernate.type.level" value="FINE"/>
+            
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@ora-reef:1521:REEF"/>
+            <property name="javax.persistence.jdbc.user" value="REEFMON"/>
+            <property name="javax.persistence.jdbc.password" value="XXXX" />
+            <property name="eclipselink.target-database" value="Oracle10g" />
+
+            <!--<property name="toplink.jdbc.driver" value="oracle.jdbc.OracleDriver"/>-->
+            <!--<property name="toplink.jdbc.url" value="jdbc:oracle:thin:@oracle:1521:REEF"/>-->
+            <!--<property name="toplink.jdbc.user" value="reefmon"/>-->
+            <!--<property name="toplink.jdbc.password" value="E3570C6DE62B4C4444E4E918F5CAD81F"/>-->
+            <!--<property name="toplink.target-database" value="Oracle"/>-->
+            <!--<property name="toplink.logging.level" value="FINER"/>-->
+<!---->
+            <!--<property name="toplink.jdbc.read-connections.max" value="1"/>-->
+            <!--<property name="toplink.jdbc.read-connections.min" value="1"/>-->
+            <!--<property name="toplink.jdbc.read-connections.shared" value="false"/>-->
+            <!--<property name="toplink.jdbc.write-connections.max" value="1"/>-->
+            <!--<property name="toplink.jdbc.write-connections.min" value="1"/>            -->
+        </properties>
+
+    </persistence-unit>
+
+    <persistence-unit name="REEF-ORACLE1" transaction-type="RESOURCE_LOCAL">
+    <provider>oracle.toplink.essentials.ejb.cmp3.EntityManagerFactoryProvider</provider>
+        <class>aims.app.reefmonitoring.ejb3.Sample</class>
+        <class>aims.app.reefmonitoring.ejb3.SampleTypes</class>
+        <class>aims.app.reefmonitoring.ejb3.Waypoints</class>
+        <class>aims.app.reefmonitoring.ejb3.ReefGeolocale</class>
+        <class>aims.app.reefmonitoring.ejb3.AesAreasbleached</class>
+        <class>aims.app.reefmonitoring.ejb3.AesBenthicForm</class>
+        <class>aims.app.reefmonitoring.ejb3.AesFeatures</class>
+        <class>aims.app.reefmonitoring.ejb3.AesHcForm</class>
+        <class>aims.app.reefmonitoring.ejb3.AesSubstrate</class>
+        <class>aims.app.reefmonitoring.ejb3.AesTargetspec</class>
+        <class>aims.app.reefmonitoring.ejb3.Allspecies</class>
+        <class>aims.app.reefmonitoring.ejb3.Benthos</class>
+        <class>aims.app.reefmonitoring.ejb3.Demog</class>
+        <class>aims.app.reefmonitoring.ejb3.AimsDocuments</class>
+        <class>aims.app.reefmonitoring.ejb3.FishCodes</class>
+        <class>aims.app.reefmonitoring.ejb3.FishCounts</class>
+        <class>aims.app.reefmonitoring.ejb3.FishFeeding</class>
+        <class>aims.app.reefmonitoring.ejb3.Juvenilecoralsample1</class>
+        <class>aims.app.reefmonitoring.ejb3.Keywords</class>
+        <class>aims.app.reefmonitoring.ejb3.Photo</class>
+        <class>aims.app.reefmonitoring.ejb3.Photogroup</class>
+        <class>aims.app.reefmonitoring.ejb3.Photokeyword</class>
+        <class>aims.app.reefmonitoring.ejb3.Phototaxa</class>
+        <class>aims.app.reefmonitoring.ejb3.RmAesthetics</class>
+        <class>aims.app.reefmonitoring.ejb3.Rmmanta</class>
+        <class>aims.app.reefmonitoring.ejb3.RmVpoint</class>
+        <class>aims.app.reefmonitoring.ejb3.ScubaSearch</class>
+        <class>aims.app.phototransect.VAllVpointCodes</class>
+        <class>aims.app.reefmonitoring.ejb3.VpointProj</class>
+        <class>aims.app.reefmonitoring.ejb3.Vtaxatable</class>
+        <class>aims.app.reefmonitoring.ejb3.Tilesdeployments</class>
+        <class>aims.app.reefmonitoring.ejb3.RmSectorEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamCountEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamFamilyEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamGenuEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamSampleEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamSpecyEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamSubOrderEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamTrophicEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.SedimentSampleEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.SedimentEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.OliteUserCruisesEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileGenuEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileMicroHabitatEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileRecruitEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileSurfaceEntity</class>
+        <properties>
+
+
+            <property name="toplink.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+            <!--<property name="toplink.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>-->
+            <property name="toplink.jdbc.url" value="jdbc:oracle:thin:@ora-reef:1521:REEF"/>
+            <property name="toplink.jdbc.user" value="REEFMON"/>
+            <property name="toplink.jdbc.password" value="XXXX"/>
+            <property name="toplink.logging.level" value="SEVERE"/>
+
+            <property name="toplink.jdbc.read-connections.max" value="1"/>
+            <property name="toplink.jdbc.read-connections.min" value="1"/>
+            <property name="toplink.jdbc.read-connections.shared" value="false"/>
+            <property name="toplink.jdbc.write-connections.max" value="1"/>
+            <property name="toplink.jdbc.write-connections.min" value="1"/>
+        </properties>
+    </persistence-unit>
+
+
+    <persistence-unit name="REEF-ACCESS" transaction-type="RESOURCE_LOCAL">
+    <provider>oracle.toplink.essentials.ejb.cmp3.EntityManagerFactoryProvider</provider>
+        <class>aims.app.reefmonitoring.ejb3.Sample</class>
+        <class>aims.app.reefmonitoring.ejb3.SampleTypes</class>
+        <class>aims.app.reefmonitoring.ejb3.Waypoints</class>
+        <class>aims.app.reefmonitoring.ejb3.ReefGeolocale</class>
+        <class>aims.app.reefmonitoring.ejb3.AesAreasbleached</class>
+        <class>aims.app.reefmonitoring.ejb3.AesBenthicForm</class>
+        <class>aims.app.reefmonitoring.ejb3.AesFeatures</class>
+        <class>aims.app.reefmonitoring.ejb3.AesHcForm</class>
+        <class>aims.app.reefmonitoring.ejb3.AesSubstrate</class>
+        <class>aims.app.reefmonitoring.ejb3.AesTargetspec</class>
+        <class>aims.app.reefmonitoring.ejb3.Allspecies</class>
+        <class>aims.app.reefmonitoring.ejb3.Benthos</class>
+        <class>aims.app.reefmonitoring.ejb3.Demog</class>
+        <class>aims.app.reefmonitoring.ejb3.AimsDocuments</class>
+        <class>aims.app.reefmonitoring.ejb3.FishCodes</class>
+        <class>aims.app.reefmonitoring.ejb3.FishCounts</class>
+        <class>aims.app.reefmonitoring.ejb3.FishFeeding</class>
+        <class>aims.app.reefmonitoring.ejb3.Juvenilecoralsample1</class>
+        <class>aims.app.reefmonitoring.ejb3.Keywords</class>
+        <class>aims.app.reefmonitoring.ejb3.Photo</class>
+        <class>aims.app.reefmonitoring.ejb3.Photogroup</class>
+        <class>aims.app.reefmonitoring.ejb3.Photokeyword</class>
+        <class>aims.app.reefmonitoring.ejb3.Phototaxa</class>
+        <class>aims.app.reefmonitoring.ejb3.RmAesthetics</class>
+        <class>aims.app.reefmonitoring.ejb3.Rmmanta</class>
+        <class>aims.app.reefmonitoring.ejb3.RmVpoint</class>
+        <class>aims.app.reefmonitoring.ejb3.ScubaSearch</class>
+        <class>aims.app.phototransect.VAllVpointCodes</class>
+        <class>aims.app.reefmonitoring.ejb3.VpointProj</class>
+        <class>aims.app.reefmonitoring.ejb3.Vtaxatable</class>
+        <class>aims.app.reefmonitoring.ejb3.Tilesdeployments</class>
+        <class>aims.app.reefmonitoring.ejb3.RmSectorEntity</class>
+        <!--<class>aims.app.reefmonitoring.ejb3.ForamCountEntity</class>-->
+        <!--<class>aims.app.reefmonitoring.ejb3.ForamFamilyEntity</class>-->
+        <!--<class>aims.app.reefmonitoring.ejb3.ForamGenuEntity</class>-->
+        <!--<class>aims.app.reefmonitoring.ejb3.ForamSampleEntity</class>-->
+        <!--<class>aims.app.reefmonitoring.ejb3.ForamSpecyEntity</class>-->
+        <!--<class>aims.app.reefmonitoring.ejb3.ForamSubOrderEntity</class>-->
+        <!--<class>aims.app.reefmonitoring.ejb3.ForamTrophicEntity</class>-->
+        <class>aims.app.reefmonitoring.ejb3.OliteUserCruisesEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileGenuEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileMicroHabitatEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileRecruitEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileSurfaceEntity</class>
+
+        <properties>
+
+
+            <property name="toplink.jdbc.driver" value="sun.jdbc.odbc.JdbcOdbcDriver"/>
+            <property name="toplink.jdbc.url" value="jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=c:\aims\reef.mdb;DriverID=22;READONLY=false}"/>
+            <property name="toplink.jdbc.user" value="system"/>
+            <property name="toplink.jdbc.password" value="s"/>
+            <property name="toplink.logging.level" value="FINER"/>
+
+            <property name="toplink.jdbc.read-connections.max" value="1"/>
+            <property name="toplink.jdbc.read-connections.min" value="1"/>
+            <property name="toplink.jdbc.read-connections.shared" value="false"/>
+            <property name="toplink.jdbc.write-connections.max" value="1"/>
+            <property name="toplink.jdbc.write-connections.min" value="1"/>
+        </properties>
+    </persistence-unit>
+
+
+    <persistence-unit name="CPCE-ACCESS" transaction-type="RESOURCE_LOCAL">
+    <provider>oracle.toplink.essentials.ejb.cmp3.EntityManagerFactoryProvider</provider>
+        <class>aims.app.reefmonitoring.ejb3.Sample</class>
+        <class>aims.app.reefmonitoring.ejb3.SampleTypes</class>
+        <class>aims.app.reefmonitoring.ejb3.Waypoints</class>
+        <class>aims.app.reefmonitoring.ejb3.ReefGeolocale</class>
+        <class>aims.app.reefmonitoring.ejb3.Benthos</class>
+        <class>aims.app.reefmonitoring.ejb3.RmSectorEntity</class>
+
+        <properties>
+
+
+            <property name="toplink.jdbc.driver" value="sun.jdbc.odbc.JdbcOdbcDriver"/>
+            <property name="toplink.jdbc.url" value="jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ=c:\aims\cpce.mdb;DriverID=22;READONLY=false}"/>
+            <property name="toplink.jdbc.user" value="system"/>
+            <property name="toplink.jdbc.password" value="s"/>
+            <property name="toplink.logging.level" value="FINER"/>
+
+            <property name="toplink.jdbc.read-connections.max" value="1"/>
+            <property name="toplink.jdbc.read-connections.min" value="1"/>
+            <property name="toplink.jdbc.read-connections.shared" value="false"/>
+            <property name="toplink.jdbc.write-connections.max" value="1"/>
+            <property name="toplink.jdbc.write-connections.min" value="1"/>
+        </properties>
+    </persistence-unit>
+
+
+    <persistence-unit name="REEF-OLITE">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>aims.app.reefmonitoring.ejb3.Sample</class>
+        <class>aims.app.reefmonitoring.ejb3.SampleTypes</class>
+        <class>aims.app.reefmonitoring.ejb3.Waypoints</class>
+        <class>aims.app.reefmonitoring.ejb3.ReefGeolocale</class>
+        <class>aims.app.reefmonitoring.ejb3.AesAreasbleached</class>
+        <class>aims.app.reefmonitoring.ejb3.AesBenthicForm</class>
+        <class>aims.app.reefmonitoring.ejb3.AesFeatures</class>
+        <class>aims.app.reefmonitoring.ejb3.AesHcForm</class>
+        <class>aims.app.reefmonitoring.ejb3.AesSubstrate</class>
+        <class>aims.app.reefmonitoring.ejb3.AesTargetspec</class>
+        <class>aims.app.reefmonitoring.ejb3.Allspecies</class>
+        <class>aims.app.reefmonitoring.ejb3.Benthos</class>
+        <class>aims.app.reefmonitoring.ejb3.Demog</class>
+        <class>aims.app.reefmonitoring.ejb3.AimsDocuments</class>
+        <class>aims.app.reefmonitoring.ejb3.FishCodes</class>
+        <class>aims.app.reefmonitoring.ejb3.FishCounts</class>
+        <class>aims.app.reefmonitoring.ejb3.FishFeeding</class>
+        <class>aims.app.reefmonitoring.ejb3.Juvenilecoralsample1</class>
+        <class>aims.app.reefmonitoring.ejb3.Keywords</class>
+        <class>aims.app.reefmonitoring.ejb3.Photo</class>
+        <class>aims.app.reefmonitoring.ejb3.Photogroup</class>
+        <class>aims.app.reefmonitoring.ejb3.Photokeyword</class>
+        <class>aims.app.reefmonitoring.ejb3.Phototaxa</class>
+        <class>aims.app.reefmonitoring.ejb3.RmAesthetics</class>
+        <class>aims.app.reefmonitoring.ejb3.Rmmanta</class>
+        <class>aims.app.reefmonitoring.ejb3.RmVpoint</class>
+        <class>aims.app.reefmonitoring.ejb3.ScubaSearch</class>
+        <class>aims.app.phototransect.VAllVpointCodes</class>
+        <class>aims.app.reefmonitoring.ejb3.VpointProj</class>
+        <class>aims.app.reefmonitoring.ejb3.Vtaxatable</class>
+        <class>aims.app.reefmonitoring.ejb3.Tilesdeployments</class>
+        <class>aims.app.reefmonitoring.ejb3.RmSectorEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamCountEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamFamilyEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamGenuEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamSampleEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamSpecyEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamSubOrderEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.ForamTrophicEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.OliteUserCruisesEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileGenuEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileMicroHabitatEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileRecruitEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileEntity</class>
+        <class>aims.app.reefmonitoring.ejb3.TileSurfaceEntity</class>
+
+        <properties>
+
+            <property name="hibernate.dialect" value="dialect.SQLiteDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
+            <property name="hibernate.connection.driver_class" value="org.sqlite.JDBC"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.target-database" value="Oracle10g" />
+
+            <!--<property name="hibernate.connection.username" value="SYSTEM"/>-->
+            <!--<property name="hibernate.connection.url" value="jdbc:access:///c:/aims/reef.mdb"/>-->
+
+
+
+            <!--<property name="toplink.jdbc.driver" value="oracle.lite.poljdbc.POLJDBCDriver"/>-->
+            <!--<property name="toplink.jdbc.user" value="system"/>-->
+            <!--<property name="toplink.jdbc.password" value="s"/>-->
+            <!--<property name="toplink.logging.level" value="FINER"/>-->
+<!---->
+            <!--<property name="toplink.jdbc.read-connections.max" value="1"/>-->
+            <!--<property name="toplink.jdbc.read-connections.min" value="1"/>-->
+            <!--<property name="toplink.jdbc.read-connections.shared" value="false"/>-->
+            <!--<property name="toplink.jdbc.write-connections.max" value="1"/>-->
+            <!--<property name="toplink.jdbc.write-connections.min" value="1"/>-->
+        </properties>
+    </persistence-unit>
+
+
+</persistence>
