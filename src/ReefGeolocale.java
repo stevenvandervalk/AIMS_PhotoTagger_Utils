@@ -1,6 +1,11 @@
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * ReefGeolocale
+ * Builds a ReefGeolocale entity from the REEFMON database.
+ * Links to RmSectorEntity
+ */
 @Entity
 //@NamedQuery(name = "ReefGeolocale.findAll",
 //    query = "select o from ReefGeolocale o")
@@ -47,7 +52,6 @@ public class ReefGeolocale implements Serializable, Comparable {
     public void setAaSection(String aaSection) {
         this.aaSection = aaSection;
     }
-
 
 
     public String getComments() {

@@ -10,6 +10,11 @@ import java.util.List;
  * Time: 8:19 AM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * TestTaxon
+ * Used to test all elements of the TaxonEntity were populated from the REEFMON database.
+ */
 public class TestTaxon {
     private static final String PERSISTENCE_UNIT_NAME = "REEF-DERBY";
     private static EntityManagerFactory factory;

@@ -9,6 +9,12 @@ import java.util.List;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * FamilyEntity
+ * Builds a FamilyEntity from the data in the REEFMON database in a format that can be turned into a TaxonEntity.
+ * The FamilyEntity will link to the OrdersEntity above it and the GenusEntity below it in the Taxon structure via IDs
+ */
 @Entity
 @Table (name = "CREEFS_FAMILY")
 public class FamilyEntity implements Serializable{

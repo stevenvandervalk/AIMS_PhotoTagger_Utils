@@ -1,6 +1,7 @@
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -8,6 +9,12 @@ import java.util.List;
  * Date: 11/08/2008
  * Time: 13:07:41
  * To change this template use File | Settings | File Templates.
+ */
+
+/**
+ * RmSectorEntity
+ * Builds a RmSectorEntity from the data in the REEFMON database.
+ * Links to the ReefGeolocale entities on A_Sector.
  */
 @Entity
 @Table(name = "RM_SECTOR")

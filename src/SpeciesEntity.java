@@ -8,6 +8,13 @@ import java.io.Serializable;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * SpeciesEntity
+ * Builds a SpeciesEntity from the data in the REEFMON database in a format that can be turned into a TaxonEntity.
+ * Only links to the GenusEntity above in the Taxon structure.  This is the lowest level in the REEFMON database for
+ * individual taxon levels.
+ */
 @Entity
 @Table (name = "CREEFS_SPECIES")
 public class SpeciesEntity implements Serializable{

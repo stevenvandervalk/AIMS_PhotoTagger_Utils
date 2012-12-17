@@ -14,6 +14,11 @@ import java.util.List;
  * Time: 2:26 PM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * TestSector
+ * Used to test all elements of the RmSectorEntity were populated from the REEFMON database.
+ */
 public class TestSector {
     private static final String PERSISTENCE_UNIT_NAME = "REEF-DERBY";
     private static EntityManagerFactory factory;

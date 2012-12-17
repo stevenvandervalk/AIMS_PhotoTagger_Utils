@@ -18,7 +18,7 @@ import java.util.List;
  * User: amoore
  * Date: 30/11/12
  * Time: 10:41 AM
- * To change this template use File | Settings | File Templates.
+ * Accesses Catalogue of Life files added to the REEFMON database.  Is no longer used in the photo tagger app.
  */
 public class CatalogueOfLifeFilter {
     private static final String PERSISTENCE_UNIT_NAME = "REEF-DERBY";
@@ -29,54 +29,13 @@ public class CatalogueOfLifeFilter {
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         EntityManager em = factory.createEntityManager();
 
-    /**
-     * This query is used to get all the starfish
-    */
-   // Query q = em.createQuery("SELECT t FROM SpeciesEntity t WHERE t.genusByGenusID.familyByFamilyID.ordersByOrdersID.clazzByClazzID.phylumByPhylumID.phylumId IN ('68.00')");
 
-    /**
-    * This query is used to get all the crustaceans (crabs)
-    */
-    //Query q = em.createQuery("SELECT t FROM SpeciesEntity t WHERE t.genusByGenusID.familyByFamilyID.ordersByOrdersID.clazzByClazzID.classId IN ('203.00')");
-        //Query q = em.createQuery("Select t From PhylumEntity t Where t.phylumId = '68.00'");
-        //List<PhylumEntity> phylums = q.getResultList();
-        //List<TaxonEntity> echinoderm = getPhylumTaxons(phylums);
-//        for (int i = 0; i < phylums.size(); i++) {
-//            List<ClazzEntity> clazzes = phylums.get(i).getClazzByPhylumID();
-//            List<TaxonEntity> taxonClazzes = getClazzTaxons(clazzes);
-//            echinoderm.get(i).setTaxonsByTaxa(taxonClazzes);
-//            echinoderm.get(i).setAllSpeciesesByTaxa(new ArrayList<AllSpecyEntity>());
-//            for (int j = 0; j < clazzes.size(); j++) {
-//                List<OrdersEntity> orders = clazzes.get(j).getOrdersByClazzID();
-//                List<TaxonEntity> taxonOrders = getOrdersTaxons(orders);
-//                taxonClazzes.get(j).setTaxonsByTaxa(taxonOrders);
-//                taxonClazzes.get(j).setAllSpeciesesByTaxa(new ArrayList<AllSpecyEntity>());
-        Query q = em.createQuery("Select t From OrdersEntity t Where t.ordersId = '661.00'");
-        List<OrdersEntity> orders = q.getResultList();
-        List<TaxonEntity> decapoda = getOrdersTaxons(orders);
-                for (int k = 0; k < orders.size(); k++) {
-                    List<FamilyEntity> families = orders.get(k).getfamilyByOrdersID();
-                    List<TaxonEntity> taxonFamilies = getFamilyTaxons(families);
-                    decapoda.get(k).setTaxonsByTaxa(taxonFamilies);
-                    decapoda.get(k).setAllSpeciesesByTaxa(new ArrayList<AllSpecyEntity>());
-                    for (int l = 0; l < families.size(); l++) {
-                        List<GenusEntity> genus = families.get(l).getGenusByFamilyID();
-                        List<TaxonEntity> taxonGenus = getGenusTaxons(genus);
-                        taxonFamilies.get(l).setTaxonsByTaxa(taxonGenus);
-                        taxonFamilies.get(l).setAllSpeciesesByTaxa(new ArrayList<AllSpecyEntity>());
-                        for (int m = 0; m < genus.size(); m++) {
-                            List<SpeciesEntity> species = genus.get(m).getSpeciesByGenusID();
-                            List<AllSpecyEntity> taxonSpecies = getSpeciesTaxons(species);
-                            taxonGenus.get(m).setTaxonsByTaxa(new ArrayList<TaxonEntity>());
-                            taxonGenus.get(m).setAllSpeciesesByTaxa(taxonSpecies);
-                        }
-                    }
-                }
-//            }
-//        }
+        List<TaxonEntity> decapoda = getTaxonEntities(em);
 
 
         writetoXML(decapoda, "decapoda");
+
+        //Checking data and structure is correct.
         int count = 1;
         for (TaxonEntity taxon : decapoda){
             System.out.println(count);
@@ -87,7 +46,63 @@ public class CatalogueOfLifeFilter {
         }
     }
 
-   // public List<TaxonEntity> addClazzes (q)
+    /**
+     * Runs the Query and builds the Taxon structure from the REEFMON database.
+     * @param em
+     * @return decapoda
+     */
+    private static List<TaxonEntity> getTaxonEntities(EntityManager em) {
+        // This query is used to get all the starfish
+        // Query q = em.createQuery("SELECT t FROM SpeciesEntity t WHERE t.genusByGenusID.familyByFamilyID.ordersByOrdersID.clazzByClazzID.phylumByPhylumID.phylumId IN ('68.00')");
+
+        // This query is used to get all the crustaceans (crabs)
+        Query q = em.createQuery("SELECT t FROM SpeciesEntity t WHERE t.genusByGenusID.familyByFamilyID.ordersByOrdersID.clazzByClazzID.classId IN ('203.00')");
+
+        //This block is required for constructing the Echinodermata (Starfish) Taxons.
+//        Query q = em.createQuery("Select t From PhylumEntity t Where t.phylumId = '68.00'");
+//        List<PhylumEntity> phylums = q.getResultList();
+//        List<TaxonEntity> echinoderm = getPhylumTaxons(phylums);
+//        for (int i = 0; i < phylums.size(); i++) {
+//            List<ClazzEntity> clazzes = phylums.get(i).getClazzByPhylumID();
+//            List<TaxonEntity> taxonClazzes = getClazzTaxons(clazzes);
+//            echinoderm.get(i).setTaxonsByTaxa(taxonClazzes);
+//            echinoderm.get(i).setAllSpeciesesByTaxa(new ArrayList<AllSpecyEntity>());
+//            for (int j = 0; j < clazzes.size(); j++) {
+//                List<OrdersEntity> orders = clazzes.get(j).getOrdersByClazzID();
+//                List<TaxonEntity> taxonOrders = getOrdersTaxons(orders);
+//                taxonClazzes.get(j).setTaxonsByTaxa(taxonOrders);
+//                taxonClazzes.get(j).setAllSpeciesesByTaxa(new ArrayList<AllSpecyEntity>());
+//        Query q = em.createQuery("Select t From OrdersEntity t Where t.ordersId = '661.00'");
+        List<OrdersEntity> orders = q.getResultList();
+        List<TaxonEntity> decapoda = getOrdersTaxons(orders);
+        for (int k = 0; k < orders.size(); k++) {
+            List<FamilyEntity> families = orders.get(k).getfamilyByOrdersID();
+            List<TaxonEntity> taxonFamilies = getFamilyTaxons(families);
+            decapoda.get(k).setTaxonsByTaxa(taxonFamilies);
+            decapoda.get(k).setAllSpeciesesByTaxa(new ArrayList<AllSpecyEntity>());
+            for (int l = 0; l < families.size(); l++) {
+                List<GenusEntity> genus = families.get(l).getGenusByFamilyID();
+                List<TaxonEntity> taxonGenus = getGenusTaxons(genus);
+                taxonFamilies.get(l).setTaxonsByTaxa(taxonGenus);
+                taxonFamilies.get(l).setAllSpeciesesByTaxa(new ArrayList<AllSpecyEntity>());
+                for (int m = 0; m < genus.size(); m++) {
+                    List<SpeciesEntity> species = genus.get(m).getSpeciesByGenusID();
+                    List<AllSpecyEntity> taxonSpecies = getSpeciesTaxons(species);
+                    taxonGenus.get(m).setTaxonsByTaxa(new ArrayList<TaxonEntity>());
+                    taxonGenus.get(m).setAllSpeciesesByTaxa(taxonSpecies);
+                }
+            }
+        }
+//            }
+//        }
+        return decapoda;
+    }
+
+    /**
+     * Creates the Phylum level of the Taxon structure.
+     * @param species
+     * @return phylumTaxons
+     */
    public static List<TaxonEntity> getPhylumTaxons (List<PhylumEntity> species){
        List<TaxonEntity> phylumTaxons = new ArrayList<TaxonEntity>();
        String previousTaxa = null;
@@ -109,6 +124,11 @@ public class CatalogueOfLifeFilter {
        return phylumTaxons;
    }
 
+    /**
+     * Creates the Class level of the Taxon structure.
+     * @param species
+     * @return clazzTaxons
+     */
     public static List<TaxonEntity> getClazzTaxons (List<ClazzEntity> species){
         List<TaxonEntity> clazzTaxons = new ArrayList<TaxonEntity>();
         String previousTaxa = null;
@@ -130,6 +150,11 @@ public class CatalogueOfLifeFilter {
         return clazzTaxons;
     }
 
+    /**
+     * Creates the Orders level of the Taxon structure.
+     * @param species
+     * @return ordersTaxon
+     */
     public static List<TaxonEntity> getOrdersTaxons (List<OrdersEntity> species){
         List<TaxonEntity> ordersTaxons = new ArrayList<TaxonEntity>();
         String previousTaxa = null;
@@ -151,6 +176,11 @@ public class CatalogueOfLifeFilter {
         return ordersTaxons;
     }
 
+    /**
+     * Creates the Family level of the Taxon structure.
+     * @param species
+     * @return familyTaxon
+     */
     public static List<TaxonEntity> getFamilyTaxons (List<FamilyEntity> species){
         List<TaxonEntity> familyTaxons = new ArrayList<TaxonEntity>();
         String previousTaxa = null;
@@ -172,6 +202,11 @@ public class CatalogueOfLifeFilter {
         return familyTaxons;
     }
 
+    /**
+     * Creates the Genus level of the Taxon structure.
+     * @param species
+     * @return genusTaxon
+     */
     public static List<TaxonEntity> getGenusTaxons (List<GenusEntity> species){
         List<TaxonEntity> genusTaxons = new ArrayList<TaxonEntity>();
         String previousTaxa = null;
@@ -193,7 +228,11 @@ public class CatalogueOfLifeFilter {
         return genusTaxons;
     }
 
-
+    /**
+     * Creates the Species level of the Taxon structure using the AllSpecyEntity.
+     * @param species
+     * @return speciesTaxon
+     */
     public static List<AllSpecyEntity> getSpeciesTaxons (List<SpeciesEntity> species){
         List<AllSpecyEntity> speciesTaxons = new ArrayList<AllSpecyEntity>();
         for (SpeciesEntity specy : species){
@@ -206,13 +245,18 @@ public class CatalogueOfLifeFilter {
         return speciesTaxons;
     }
 
-    public static void writetoBin(List a, String fileName)  {
+    /**
+     * Makes the bin file.
+     * @param taxonList
+     * @param fileName
+     */
+    public static void writetoBin(List taxonList, String fileName)  {
         ObjectOutputStream e = null;
         try {
             e = new ObjectOutputStream(
                     new BufferedOutputStream(
                             new FileOutputStream(fileName +".bin")));
-            e.writeObject(a);
+            e.writeObject(taxonList);
             e.close();
 
         } catch (Exception e2) {
@@ -220,6 +264,11 @@ public class CatalogueOfLifeFilter {
         }
     }
 
+    /**
+     * Makes the xml file.
+     * @param list
+     * @param fileName
+     */
     public static void writetoXML (List list, String fileName){
         XMLEncoder xml = null;
         try {

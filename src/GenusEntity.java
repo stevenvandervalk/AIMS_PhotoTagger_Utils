@@ -9,6 +9,12 @@ import java.util.List;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * GenusEntity
+ * Builds a GenusEntity from the data in the REEFMON database in a format that can be turned into a TaxonEntity.
+ * The GenusEntity will link to the FamilyEntity above it and the SpeciesEntity below it in the Taxon structure via IDs.
+ */
 @Entity
 @Table (name = "CREEFS_GENUS")
 public class GenusEntity implements Serializable{

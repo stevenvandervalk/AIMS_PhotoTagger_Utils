@@ -11,6 +11,11 @@ import java.util.List;
  * Time: 8:19 AM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * TestFamily
+ * Used to test all elements of the FamilyEntity were populated by the REEFMON database and the relationship between levels was maintained.
+ */
 public class TestFamily {
     private static final String PERSISTENCE_UNIT_NAME = "REEF-DERBY";
     private static EntityManagerFactory factory;

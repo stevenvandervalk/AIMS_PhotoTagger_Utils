@@ -5,16 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 @Entity
 @NamedQuery(name = "Keywords.findAll", query = "select o from Keywords o")
 public class Keywords implements Serializable {
+
     @Id
     @Column(nullable = false)
     private String keyword;
 
     public Keywords() {
-
     }
 
     public String getKeyword() {

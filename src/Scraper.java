@@ -1,9 +1,6 @@
 import aims.app.reefmonitoring.ejb3.AllSpecyEntity;
 import aims.app.reefmonitoring.ejb3.TaxonEntity;
-import com.google.resting.Resting;
-import com.google.resting.component.impl.ServiceResponse;
 
-import com.sun.xml.internal.stream.writers.XMLWriter;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -20,74 +17,50 @@ import java.util.List;
  * Date: 12/12/12
  * Time: 8:58 AM
  * To change this template use File | Settings | File Templates.
+ * Scraper creates all the bin files needed for use with the Photo Tagging App.
+ * Accesses the Catalogue of Life webservices to extend the Taxons availible in the
+ * REEFMON Database.  Further Taxons may be added to the bin file compilation as required.
  */
+
 public class Scraper {
 
+    /**
+     * Creates 5 bin files.
+     */
     public static void main(String[] args) {
-        ServiceResponse response = Resting.get("http://www.catalogueoflife.org/col/webservice?name=Decapoda&response=full", 80);
-        //System.out.println(response);
-        String xml = response.getResponseString();
-        //System.out.println(xml);
-
-        TaxonEntity decapodas = makeTaxa("2341806");
-        //TaxonEntity decapodas = makeTaxa("Hippolytidae");
-        List<TaxonEntity> list = new ArrayList<TaxonEntity>();
-        list.add(decapodas);
-
-
-        try {
-            XMLEncoder xmlfile = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("test.xml")));
-            xmlfile.writeObject(decapodas);
-            xmlfile.close();
-             ObjectOutputStream e = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("test.bin")));
-             e.writeObject(list);
-            e.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-
-//       try {
-//            XMLWriter e = new XMLWriter(new BufferedWriter(new FileWriter("test.xml")));
-//            e.write(xml);
-//            e.close();
-//        } catch (IOException e1) {
-//            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//        }
-
-//        SAXBuilder builder = new SAXBuilder();
-//        try {
-//            Document doc = builder.build(new File("test.xml"));
-//            Element root = doc.getRootElement();
-//            System.out.println(root.toString());
-//            List<Element> taxon = root.getChild("result").getChild("child_taxa").getChildren("taxon");
-//            List<TaxonEntity> taxons = new ArrayList<TaxonEntity>();
-//            for (Element taxa : taxon){
-//                String name = taxa.getChild("name").getText();
-//                String supertaxa = "Decapoda";
-//                String taxalevel = taxa.getChild("rank").getText();
-//                TaxonEntity temptaxa = new TaxonEntity(name, supertaxa, taxalevel);
-//                taxons.add(temptaxa);
-//
-//                //System.out.println(name);
-//            }
-//            for (TaxonEntity taxa : taxons){
-//                System.out.println(taxa.getTaxa());
-//            }
-//
-//        } catch (JDOMException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//        } catch (IOException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//        }
-
-
+        getEchinoderms();
+        getDecapoda();
+        createAllLookupFiles.createLookupFiles();
     }
 
-   private static TaxonEntity makeTaxa(String name) {
+    /**
+     * Decapoda Bin creation. (Crabs, Lobsters, Prawns, etc)
+     */
+    private static void getDecapoda() {
+        TaxonEntity decapodas = makeTaxa("2341806");
+        List<TaxonEntity> decapodasList = new ArrayList<TaxonEntity>();
+        decapodasList.add(decapodas);
+        makeBins("decapodas", decapodasList);
+    }
 
+    /**
+     * Echinodermata Bin creation. (Starfish, etc)
+     */
+    private static void getEchinoderms() {
+        TaxonEntity echinodermata = makeTaxa("2339667");
+        List<TaxonEntity> echinodermataList = new ArrayList<TaxonEntity>();
+        echinodermataList.add(echinodermata);
+        makeBins("echinodermata", echinodermataList);
+    }
 
+    /**
+     * Creates a structured TaxonEntity from the Taxon name or ID String provided.
+     * Data read from the Catalogue of Life site.
+     * The relationships of Taxon levels will be constructed.
+     * @param name, used in url query
+     * @return TaxonEntity, structured.
+     */
+    private static TaxonEntity makeTaxa(String name) {
 
         String url = "http://www.catalogueoflife.org/annual-checklist/2012/webservice?id=" + name + "&response=full";
 
@@ -121,6 +94,12 @@ public class Scraper {
 
     }
 
+    /**
+     * Creates the Specie element of the Taxon structure.
+     * Data read from the Catalogue of Life site.
+     * @param name, used in url query
+     * @return AllSpecyEntity
+     */
     private static List<AllSpecyEntity> getSpecies(String name) {
 
         String url = "http://www.catalogueoflife.org/annual-checklist/2012/webservice?id=" + name + "&response=full";
@@ -146,6 +125,11 @@ public class Scraper {
         return specyEntities;
     }
 
+    /**
+     * Constructs the relationship of each Taxon at each Tasa level.
+     * @param name, used in url query
+     * @return TaxonEntity
+     */
     public static List<TaxonEntity> getSubClasses(String name) {
 
         String url = "http://www.catalogueoflife.org/annual-checklist/2012/webservice?id=" + name + "&response=full";
@@ -177,5 +161,41 @@ public class Scraper {
 
 
         return subClasses;
+    }
+
+    /**
+     * Bin files
+     * @param fileName
+     * @param taxonEntityList
+     */
+    public static void makeBins(String fileName, List<TaxonEntity> taxonEntityList) {
+        try {
+            ObjectOutputStream e = new ObjectOutputStream(new FileOutputStream(fileName + ".bin"));
+            e.writeObject(taxonEntityList);
+            e.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+    }
+    /**
+     * XML files
+     * @param fileName
+     * @param taxonEntityList
+     */
+    public static void makeXml(String fileName, List<TaxonEntity> taxonEntityList) {
+        try {
+            XMLEncoder xmlfile = new XMLEncoder(new FileOutputStream(fileName + ".xml"));
+            xmlfile.writeObject(taxonEntityList);
+            xmlfile.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
     }
 }

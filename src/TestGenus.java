@@ -11,6 +11,11 @@ import java.util.List;
  * Time: 8:19 AM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * TestGenus
+ * Used to test all elements of the GenusEntity were populated by the REEFMON database and the relationship between levels was maintained.
+ */
 public class TestGenus {
     private static final String PERSISTENCE_UNIT_NAME = "REEF-DERBY";
     private static EntityManagerFactory factory;

@@ -13,6 +13,11 @@ import java.util.List;
  * Time: 8:19 AM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * TestSpec
+ * Used to test all elements of the AllSpecyEntity were populated from the REEFMON database.
+ */
 public class TestSpec {
     private static final String PERSISTENCE_UNIT_NAME = "REEF-DERBY";
     private static EntityManagerFactory factory;

@@ -10,6 +10,13 @@ import java.util.List;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * PhylumEntity
+ * Builds a PhylumEntity from the data in the REEFMON database in a format that can be turned into a TaxonEntity.
+ * Only links to the ClazzEntity below in the Taxon structure.  This is the highest level in the REEFMON database for
+ * individual taxon levels.
+ */
 @Entity
 @Table (name = "CREEFS_PHYLUM")
 public class PhylumEntity implements Serializable{

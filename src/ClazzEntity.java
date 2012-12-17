@@ -9,9 +9,16 @@ import java.util.List;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * ClazzEntity
+ * Builds a ClazzEntity from the data in the REEFMON database in a format that can be turned into a TaxonEntity.
+ * The ClazzEntity will link to the PhylumEntity above it and the OrdersEntity below it in the Taxon structure via IDs.
+ */
 @Entity
 @Table (name = "CREEFS_CLAZZ")
 public class ClazzEntity implements Serializable{
+
     private String classId;
 
     @Id

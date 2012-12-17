@@ -9,6 +9,12 @@ import java.util.List;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * OrdersEntity
+ * Builds an OrdersEntity from the data in the REEFMON database in a format that can be turned into a TaxonEntity.
+ * The OrdersEntity will link to the ClazzEntity above it and the FamilyEntity below it in the Taxon structure via IDs.
+ */
 @Entity
 @Table (name = "CREEFS_ORDERS")
 public class OrdersEntity implements Serializable{
